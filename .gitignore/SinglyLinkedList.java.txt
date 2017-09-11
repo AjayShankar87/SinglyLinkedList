@@ -1,0 +1,159 @@
+
+ //package datastructures;
+
+/**
+ *
+ * @author ajays
+ */
+
+class Node
+{
+    public int data;
+    public Node next;
+
+    public int getData() {
+        return data;
+    }
+
+    public Node getNext() {
+        return next;
+    }
+
+    public void setData(int data) {
+        this.data = data;
+    }
+
+    public void setNext(Node next) {
+        this.next = next;
+    }
+    
+    
+    
+    public Node(int data)
+    {
+        this.data = data;
+        this.next = null;
+        
+        
+    }
+    
+}
+
+class Lnkdlst 
+
+{
+    
+    public Node head;
+    public int size;
+    
+    public Lnkdlst()
+    {
+        head = null; // empty list, head points to null at the beginning
+    }
+   // public boolean isEmpty()
+    //{
+      //  return head == null;
+    //}
+    
+    
+   // Adding element at the start of list
+    public void addStart(int data)
+    {
+        Node n = new Node(data);
+        n.next = head;
+        head = n;
+        size++;
+    }
+    
+    public void addEnd(int data)
+    {
+        if(head == null)
+        {
+            addStart(data); // if the list is empty, call the addstart method and make this as the first value and update the pointer
+        }
+        
+        else
+        {
+            Node n = new Node(data);
+            Node currentNode = head;
+            
+            while (currentNode.next!= null)
+            {
+                currentNode = currentNode.next; // here we are looping until the next is pointing to null, so that the element can be added
+            }
+            
+            currentNode.next = n;
+            
+            size++;
+        }
+    }
+    
+    public void deleteTail()
+    {
+        Node currentNode = head;
+        
+        if(head.next == null)
+        {
+            head = null; // check whether the head is the only element, if yes, assign null to the head
+        }
+        
+        else
+        {
+            while(currentNode.next.next != null)
+            {
+                currentNode = currentNode.next;
+            }
+            
+            //int temp = currentNode.next.data;
+            currentNode.next = null;
+            
+            size--; 
+        }
+        
+    }
+    
+    public Node removegrt(int target)
+    {
+        Node n = head;
+         while(n!= null && n.data > target)
+         {
+             n = n.getNext();
+         }
+        return n; 
+    }
+    
+    public void displayElm() // Displaying the added elements 
+    {
+        Node n = head;
+        while( n != null)
+        {
+            System.out.println("-->" +n.data);
+            n = n.getNext();   // print the list and traverse it until the tail is reached.
+        }
+    }
+}
+
+public class singlyLnkdlst
+
+    {
+        public static void main(String[] args) throws Exception
+                
+        {
+            Lnkdlst l = new Lnkdlst();
+            l.addStart(1);
+            l.addStart(2);
+            l.addEnd(3);
+            l.addEnd(4);
+            l.addEnd(5);
+            System.out.println("The list size is : " +l.size);
+            l.displayElm();
+            System.out.println("The list after deleting the tail element is: ");
+            l.deleteTail();
+            
+            l.removegrt(3);
+            l.displayElm();
+        }
+    }
+
+
+
